@@ -236,6 +236,23 @@ impl RoutingHost {
         })
     }
 
+    /// Select, admit and book a worker for `request` in `phase`, without
+    /// sending it. The returned plan owns the booking until
+    /// [`Self::dispatch_kv_plan`] sends it or [`RoutePlan::abort`] releases it.
+    ///
+    /// Not implemented yet: ai-dynamo/dynamo#17292 adds it. It is declared so
+    /// that callers such as `PrefillRouter::schedule` can be written against
+    /// it; every call returns an error until then.
+    pub(crate) async fn plan_kv_route(
+        &self,
+        _request: &SingleIn<PreprocessedRequest>,
+        _phase: RequestPhase,
+    ) -> Result<RoutePlan, Error> {
+        Err(anyhow::anyhow!(
+            "RoutingHost::plan_kv_route is not implemented yet (ai-dynamo/dynamo#17292)"
+        ))
+    }
+
     pub(crate) async fn plan_kv_route_from_preview(
         &self,
         request: &SingleIn<PreprocessedRequest>,

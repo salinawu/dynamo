@@ -358,7 +358,7 @@ impl RoutePlan {
         self.budget.remaining()
     }
 
-    #[cfg(test)]
+    /// Give the booking back without dispatching.
     pub(crate) async fn abort(self) {
         self.cleanup.finish().await;
     }

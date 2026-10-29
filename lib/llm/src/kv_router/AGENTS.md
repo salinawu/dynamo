@@ -8,4 +8,5 @@
 - `publisher/` receives KV-cache events and worker metrics from inference engines.
 - `routing_host.rs` owns selection, dispatch, and response cleanup. `routing_host/kv_selection.rs` chooses KV-routed workers, `routing_host/request_guard.rs` tracks progress and cleanup, and `routing_host/cancellation.rs` stops unfinished work when the client cancels.
 - `prefill_router/` optionally runs a request on a prefill worker before sending it to decode.
+- `stage_router.rs` defines `StageRouter`, the `schedule` / `preview` / `dispatch` interface shared by single-stage routers. `PrefillRouter` implements it so far.
 - `encoder_router.rs` optionally runs multimodal inputs through an encoder worker before token generation.
